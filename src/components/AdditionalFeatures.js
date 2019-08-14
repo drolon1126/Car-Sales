@@ -1,14 +1,20 @@
 import React from 'react';
 import AdditionalFeature from './AdditionalFeature';
+import { useSelector, useDispatch } from 'react-redux';
+import {buyItem} from '../actions/actions';
 
-const AdditionalFeatures = props => {
+const AdditionalFeatures = () => {
+
+  const store = useSelector(state=>state.store);
+  const dispatch = useDispatch();
+
   return (
     <div className="content">
       <h4>Additional Features</h4>
-      {props.store.length ? (
+      {store.length ? (
         <ol type="1">
-          {props.store.map(item => (
-            <AdditionalFeature key={item.id} feature={item} />
+          {store.map(item => (
+            <AdditionalFeature key={item.id} feature={item} buyItem={(i)=>{dispatch(buyItem(i))}} />
           ))}
         </ol>
       ) : (
@@ -19,3 +25,4 @@ const AdditionalFeatures = props => {
 };
 
 export default AdditionalFeatures;
+
